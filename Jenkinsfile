@@ -1,13 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'fffcb7a6-67ad-44fe-b49d-7ef2a07860ff', url: 'https://git.mezzp.com/izzp/hello.git']]])
                 echo 'Hello World'
             }
         }
-        stage('Hello1') {
+        stage('Test') {
             steps {
                 //定义镜像名称
                 def imageName = "${project_name}:${tag}"
@@ -16,7 +16,7 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Hello1') {
+        stage('Deploy') {
             steps {
                  //删除本地镜像
                 sh "docker rmi -f ${imageName}"
