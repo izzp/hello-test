@@ -1,15 +1,5 @@
 pipeline {
     agent any
-    //gitlab的凭证
-    def git_auth = "68f2087f-a034-4d39-a9ff-1f776dd3dfa8"
-    //构建版本的名称
-    def tag = "latest"
-    //Harbor私服地址
-    def harbor_url = "192.168.66.102:85"
-    //Harbor的项目名称
-    def harbor_project_name = "tensquare"
-    //Harbor的凭证
-    def harbor_auth = "ef499f29-f138-44dd-975e-ff1ca1d8c933"
     stages {
         stage('Hello') {
             steps {
