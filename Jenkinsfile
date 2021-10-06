@@ -1,33 +1,32 @@
 pipeline {
     agent any
     tools {
-        // Install the Maven version configured as "M3" and add it to the path.
         maven "M3"
     }
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'fffcb7a6-67ad-44fe-b49d-7ef2a07860ff', url: 'https://git.mezzp.com/izzp/hello.git']]])
                 echo 'Hello World'
             }
         }
-        stage('¹¹½¨jar') {
+        stage('Build Jar') {
             steps {
-                //±àÒëjar
+                //ç¼–è¯‘jar
                 sh "mvn clean package"
                 echo 'Hello World'
             }
         }
-        stage('Test') {
+        stage('Build Docker') {
             steps {
-                //±àÒë£¬¹¹½¨±¾µØ¾µÏñ
+                //ç¼–è¯‘ï¼Œæ„å»ºæœ¬åœ°é•œåƒ
                 sh "docker build"
-                echo '¹¹½¨±¾µØ¾µÏñ'
+                echo 'æ„å»ºæœ¬åœ°é•œåƒ'
             }
         }
         stage('Deploy') {
             steps {
-                 //É¾³ı±¾µØ¾µÏñ
+                 //åˆ é™¤æœ¬åœ°é•œåƒ
 //                 sh "docker rmi -f ${imageName}"
 //                 sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
                 echo 'Hello World'
