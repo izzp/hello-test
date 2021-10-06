@@ -29,5 +29,4 @@ node {
      //删除本地镜像
      sh "docker rmi -f ${imageName}"
      sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
-    }
 }
