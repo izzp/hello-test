@@ -19,8 +19,8 @@ node {
          //编译，构建本地镜像
          sh "mvn -f ${project_name} clean package dockerfile:build"
          //给镜像打标签
-         sh "docker tag ${imageName}
-         ${harbor_url}/${harbor_project_name}/${imageName}"
+//          sh "docker tag ${imageName}
+//          ${harbor_url}/${harbor_project_name}/${imageName}"
          //登录
         // sh "docker login -u ${username} -p ${password} ${harbor_url}"
          //上传镜像
