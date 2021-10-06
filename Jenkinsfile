@@ -1,27 +1,24 @@
 pipeline {
     agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
-    }
-
+    //Docker仓库的项目名称
+    def harbor_project_name = "hello"
+    //构建版本的名称
+    def tag = "latest"
     stages {
-        stage('Build') {
+        stage('拉取代码') {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'fffcb7a6-67ad-44fe-b49d-7ef2a07860ff', url: 'https://git.mezzp.com/izzp/hello.git']]])
+        }
+        stage('编译，构建镜像') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://git.mezzp.com/izzp/hello.git'
-
-                // Run Maven on a Unix agent.
-                sh "mvn clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+                //定义镜像名称
+                def imageName = "${project_name}:${tag}"
+                //编译，构建本地镜像
+                sh "mvn -f ${project_name} clean package dockerfile:build"
+                //给镜像打标签
+                sh "docker tag ${imageName}
+                ${harbor_url}/${harbor_project_name}/${imageName}"
             }
-
             post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
                 success {
                     //junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
