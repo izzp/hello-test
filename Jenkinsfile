@@ -11,23 +11,23 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('æ„å»ºjar') {
+        stage('¹¹½¨jar') {
             steps {
-                //ç¼–è¯‘jar
+                //±àÒëjar
                 sh "mvn clean package"
                 echo 'Hello World'
             }
         }
         stage('Test') {
             steps {
-                //ç¼–è¯‘ï¼Œæ„å»ºæœ¬åœ°é•œåƒ
+                //±àÒë£¬¹¹½¨±¾µØ¾µÏñ
                 sh "docker build"
-                echo 'æ„å»ºæœ¬åœ°é•œåƒ'
+                echo '¹¹½¨±¾µØ¾µÏñ'
             }
         }
         stage('Deploy') {
             steps {
-                 //åˆ é™¤æœ¬åœ°é•œåƒ
+                 //É¾³ı±¾µØ¾µÏñ
 //                 sh "docker rmi -f ${imageName}"
 //                 sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
                 echo 'Hello World'
