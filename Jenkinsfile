@@ -1,7 +1,7 @@
 pipeline {
     agent any
     //Docker仓库的项目名称
-    def harbor_project_name = "hello"
+    def project_name = "hello"
     //构建版本的名称
     def tag = "latest"
     stages {
@@ -14,9 +14,6 @@ pipeline {
                 def imageName = "${project_name}:${tag}"
                 //编译，构建本地镜像
                 sh "mvn -f ${project_name} clean package dockerfile:build"
-                //给镜像打标签
-                sh "docker tag ${imageName}
-                ${harbor_url}/${harbor_project_name}/${imageName}"
             }
             post {
                 success {
