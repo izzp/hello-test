@@ -11,7 +11,6 @@ def harbor_auth = "ef499f29-f138-44dd-975e-ff1ca1d8c933"
 node {
     stage('拉取代码') {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'fffcb7a6-67ad-44fe-b49d-7ef2a07860ff', url: 'https://git.mezzp.com/izzp/hello.git']]])
-        }
     }
     stage('编译，构建镜像') {
          //定义镜像名称
