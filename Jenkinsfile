@@ -19,7 +19,7 @@ pipeline {
         stage('构建本地镜像') {
             steps {
                 //编译，构建本地镜像
-                sh "docker build -t hello/hello:v1 ."
+                sh "docker build -t hello/hello:v2 ."
             }
         }
         stage('Deploy') {
@@ -27,7 +27,7 @@ pipeline {
              //删除本地镜像
 //              sh "docker rmi -f ${imageName}"
 //              sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
-                sh "docker run -d -p 9999:8080 hello/hello:v1 ."
+                sh "docker run -d -p 9999:8080 hello/hello:v2 ."
                 echo 'Hello World'
             }
         }
