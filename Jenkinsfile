@@ -27,7 +27,7 @@ pipeline {
              //删除本地镜像
 //              sh "docker rmi -f ${imageName}"
 //              sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
-                sh "docker run -d -p 8081:8080 hello/hello:v1 ."
+                sh "docker run -d -p 9999:8080 hello/hello:v1 ."
                 echo 'Hello World'
             }
         }
