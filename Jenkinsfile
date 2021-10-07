@@ -10,25 +10,24 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Build Jar') {
+        stage('构建jar') {
             steps {
                 //编译jar
                 sh "mvn clean package"
-                echo 'Hello World'
             }
         }
-        stage('Build Docker') {
+        stage('构建本地镜像') {
             steps {
                 //编译，构建本地镜像
                 sh "docker build -t hello/hello:v1 ."
-                echo '构建本地镜像'
             }
         }
         stage('Deploy') {
             steps {
-                 //删除本地镜像
-//                 sh "docker rmi -f ${imageName}"
-//                 sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
+             //删除本地镜像
+//              sh "docker rmi -f ${imageName}"
+//              sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
+                sh "docker run -d -p 8081:8080 hello/hello:v1 ."
                 echo 'Hello World'
             }
         }
