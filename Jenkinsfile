@@ -20,7 +20,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 //编译，构建本地镜像
-                sh "docker build"
+                sh "docker build -t hello/hello:v1 ."
                 echo '构建本地镜像'
             }
         }
